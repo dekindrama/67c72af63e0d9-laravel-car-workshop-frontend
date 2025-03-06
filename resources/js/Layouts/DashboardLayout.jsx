@@ -1,13 +1,15 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ApplicationName from '@/Components/ApplicationName';
 import ApplicationVersion from '@/Components/ApplicationVersion';
-import { Link } from '@inertiajs/react';
-import { FaBars, FaUserCircle, FaUserCog } from 'react-icons/fa';
+import { Link, usePage } from '@inertiajs/react';
+import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { GrStatusUnknown } from 'react-icons/gr';
 
 const DashboardLayout = ({ children }) => {
-    const roleName = 'Role Name';
-    const userName = 'User Name';
+    const { user } = usePage().props.auth;
+    const { roles } = usePage().props;
+    const roleName = user.role;
+    const userName = user.name;
 
     return (
         <>
@@ -96,7 +98,7 @@ const DashboardLayout = ({ children }) => {
                                 {children}
                                 <Footer />
                             </div>
-                            <div>hello world side</div>
+                            <div></div>
                         </div>
                     </div>
                 </div>
@@ -129,320 +131,36 @@ const DashboardLayout = ({ children }) => {
                         </div>
                         <div className="h-4"></div>
                         <ul className="menu bg-base-100 text-base-content min-h-full w-80 px-4 py-0">
-                            <li>
-                                <details id="disclosure-components" open="">
-                                    <summary className="group">
-                                        <span>
-                                            <FaUserCog />
-                                        </span>{' '}
-                                        Pengaturan Akun
-                                    </summary>
-                                    <ul>
-                                        <h2 className="menu-title flex items-center gap-4 px-1.5">
+                            {user.role == roles.ADMIN && (
+                                <>
+                                    <li>
+                                        <Link
+                                            href={route('admin.service.index')}
+                                        >
                                             <span className="text-base-content">
-                                                <FaUserCog />
+                                                <GrStatusUnknown />
                                             </span>{' '}
-                                            Actions
-                                        </h2>
-                                        <ul>
-                                            <li>
-                                                <Link href={'#'}>
-                                                    <span className="text-base-content">
-                                                        <FaUserCog />
-                                                    </span>{' '}
-                                                    Manage User
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link href={'#'}>
-                                                    <span className="text-base-content">
-                                                        <FaUserCog />
-                                                    </span>{' '}
-                                                    Manage Role
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </ul>
-                                </details>
-                            </li>
-                            {/* Nav 1 */}
-                            <li>
-                                <details id="disclosure-components" open="">
-                                    <summary className="group">
-                                        <span>
-                                            <GrStatusUnknown />
-                                        </span>{' '}
-                                        Parent Nav 1
-                                    </summary>
-                                    <ul>
-                                        <li>
-                                            <h2 className="menu-title flex items-center gap-4 px-1.5">
-                                                <span className="text-base-content">
-                                                    <GrStatusUnknown />
-                                                </span>{' '}
-                                                Group Nav 1
-                                            </h2>
-                                            <ul>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 1
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 2
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <h2 className="menu-title flex items-center gap-4 px-1.5">
-                                                <span className="text-base-content">
-                                                    <GrStatusUnknown />
-                                                </span>{' '}
-                                                Group Nav 1
-                                            </h2>
-                                            <ul>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 1
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 2
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <h2 className="menu-title flex items-center gap-4 px-1.5">
-                                                <span className="text-base-content">
-                                                    <GrStatusUnknown />
-                                                </span>{' '}
-                                                Group Nav 1
-                                            </h2>
-                                            <ul>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 1
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 2
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </details>
-                            </li>
-                            {/* Nav 2 */}
-                            <li>
-                                <details id="disclosure-components" open="">
-                                    <summary className="group">
-                                        <span>
-                                            <GrStatusUnknown />
-                                        </span>{' '}
-                                        Parent Nav 2
-                                    </summary>
-                                    <ul>
-                                        <li>
-                                            <h2 className="menu-title flex items-center gap-4 px-1.5">
-                                                <span className="text-base-content">
-                                                    <GrStatusUnknown />
-                                                </span>{' '}
-                                                Group Nav 1
-                                            </h2>
-                                            <ul>
-                                                <li>
-                                                    <Link href={'#'}>
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Sub Nav 1
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    <h2 className="menu-title flex items-center gap-4 px-1.5">
-                                                        <span className="text-base-content">
-                                                            <GrStatusUnknown />
-                                                        </span>{' '}
-                                                        Nested 1
-                                                    </h2>
-                                                    <ul>
-                                                        <li>
-                                                            <Link href={'#'}>
-                                                                <span className="text-base-content">
-                                                                    <GrStatusUnknown />
-                                                                </span>{' '}
-                                                                Sub Nav 1
-                                                            </Link>
-                                                        </li>
-                                                        <li>
-                                                            <h2 className="menu-title flex items-center gap-4 px-1.5">
-                                                                <span className="text-base-content">
-                                                                    <GrStatusUnknown />
-                                                                </span>{' '}
-                                                                Group Nav 1
-                                                            </h2>
-                                                            <ul>
-                                                                <li>
-                                                                    <Link
-                                                                        href={
-                                                                            '#'
-                                                                        }
-                                                                    >
-                                                                        <span className="text-base-content">
-                                                                            <GrStatusUnknown />
-                                                                        </span>{' '}
-                                                                        Sub Nav
-                                                                        1
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link
-                                                                        href={
-                                                                            '#'
-                                                                        }
-                                                                    >
-                                                                        <span className="text-base-content">
-                                                                            <GrStatusUnknown />
-                                                                        </span>{' '}
-                                                                        Sub Nav
-                                                                        2
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li>
-                                <details id="disclosure-docs" open="">
-                                    <summary className="group">
-                                        <span>
-                                            <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 48 48"
-                                                className="h-5 w-5 text-orange-400"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M5 7H16C20.4183 7 24 10.5817 24 15V42C24 38.6863 21.3137 36 18 36H5V7Z"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="4"
-                                                    strokeLinejoin="bevel"
-                                                ></path>
-                                                <path
-                                                    d="M43 7H32C27.5817 7 24 10.5817 24 15V42C24 38.6863 26.6863 36 30 36H43V7Z"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="4"
-                                                    strokeLinejoin="bevel"
-                                                ></path>
-                                            </svg>
-                                        </span>
-                                        Docs
-                                    </summary>
-                                    <ul>
-                                        <li>
-                                            <a
-                                                href="/docs/install/"
-                                                className="group"
-                                            >
-                                                <span>Install</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/use/"
-                                                className="group"
-                                            >
-                                                <span>Use</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/customize/"
-                                                className="active active group"
-                                            >
-                                                <span>
-                                                    Customize components
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/config/"
-                                                className="group"
-                                            >
-                                                <span>Config</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/colors/"
-                                                className="group"
-                                            >
-                                                <span>Colors</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/themes/"
-                                                className="bg-primary text-primary-content group"
-                                            >
-                                                <span>Themes</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/utilities/"
-                                                className="group"
-                                            >
-                                                <span>Utilities</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="/docs/layout-and-typography/"
-                                                className="group"
-                                            >
-                                                <span>
-                                                    Layout &amp; Typography
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </details>
-                            </li>
+                                            Services
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href={'#'}>
+                                            <span className="text-base-content">
+                                                <GrStatusUnknown />
+                                            </span>{' '}
+                                            Users
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href={'#'}>
+                                            <span className="text-base-content">
+                                                <GrStatusUnknown />
+                                            </span>{' '}
+                                            Repairs
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </aside>
                 </div>

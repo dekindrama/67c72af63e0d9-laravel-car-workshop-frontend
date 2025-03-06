@@ -6,10 +6,7 @@ const Page = () => {
         password: '',
     });
 
-    console.log(data, errors);
-
     function onLogin(e) {
-        console.log('hit login');
         e.preventDefault();
 
         post(route('auth.login'));

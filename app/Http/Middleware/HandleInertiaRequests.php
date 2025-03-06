@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use App\Helpers\AuthApiHelper;
 use App\Helpers\TokenHelper;
 use Illuminate\Http\Request;
@@ -45,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'appVersion' => config('app.version'),
             'appName' => config('app.name'),
+            'roles' => RoleEnum::getObject(),
         ];
     }
 }

@@ -11,10 +11,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthApiHelper
 {
-    const BASE_URL = 'http://localhost:8000/api';
     static function login(string $email, string $password) : string {
         $response = ApiHelper::request()
-            ->post(Self::BASE_URL.'/login', [
+            ->post(config('app.base_url_api').'/login', [
                 'email' => $email,
                 'password' => $password,
             ]);
@@ -29,7 +28,7 @@ class AuthApiHelper
     }
 
     static function user(string $token = null) : ?UserEntity {
-        $response = ApiHelper::request($token)->get(Self::BASE_URL.'/logged-user');
+        $response = ApiHelper::request($token)->get(config('app.base_url_api').'/logged-user');
 
         if ($response->status() !== Response::HTTP_OK) {
             return null;
@@ -39,17 +38,17 @@ class AuthApiHelper
     }
 
     static function check(string $token = null) : bool {
-        $response = ApiHelper::request($token)->get(Self::BASE_URL.'/logged-user');
+        $response = ApiHelper::request($token)->get(config('app.base_url_api').'/logged-user');
 
         if ($response->status() !== Response::HTTP_OK) {
-            return true;
+            return false;
         }
 
         return true;
     }
 
     static function logout(string $token) : void {
-        $response = ApiHelper::request($token)->post(Self::BASE_URL.'/logout');
+        $response = ApiHelper::request($token)->post(config('app.base_url_api').'/logout');
 
         if ($response->status() !== Response::HTTP_OK) {
             abort($response->status(), $response->json()['message']);

@@ -15,4 +15,12 @@ class RoleEnum
             Self::CAR_OWNER,
         ];
     }
+
+    static function getObject() : object {
+        return (object)[
+            'ADMIN' => Self::ADMIN,
+            'MECHANIC' => Self::MECHANIC,
+            'CAR_OWNER' => Self::CAR_OWNER,
+        ];
+    }
 }
