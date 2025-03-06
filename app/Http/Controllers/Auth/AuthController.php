@@ -30,6 +30,6 @@ class AuthController extends Controller
         $token = TokenHelper::get();
         AuthApiHelper::logout($token);
 
-        return to_route('dashboard.index');
+        return to_route('auth.login');
     }
 }

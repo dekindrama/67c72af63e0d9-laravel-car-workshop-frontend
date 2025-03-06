@@ -2,14 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\RoleEnum;
 use App\Helpers\AuthApiHelper;
 use App\Helpers\TokenHelper;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthMiddleware
+class GuestMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,13 +18,9 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $token = TokenHelper::get();
-        if ($token == null) {
-            return redirect(route('auth.login'));
-        }
-
         $check = AuthApiHelper::check($token);
-        if ($check == false) {
-            return redirect(route('auth.login'));
+        if ($token && $check) {
+            return redirect(route('dashboard.index'));
         }
 
         return $next($request);

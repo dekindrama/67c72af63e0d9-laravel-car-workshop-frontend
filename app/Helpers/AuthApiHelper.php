@@ -28,17 +28,17 @@ class AuthApiHelper
         return $response->json()['data']['token'];
     }
 
-    static function user(string $token) : UserEntity {
+    static function user(string $token = null) : ?UserEntity {
         $response = ApiHelper::request($token)->get(Self::BASE_URL.'/logged-user');
 
         if ($response->status() !== Response::HTTP_OK) {
-            abort($response->status(), $response->json()['message']);
+            return null;
         }
 
         return UserEntity::make()->fromArray($response->json()['data']['user']);
     }
 
-    static function check(string $token) : bool {
+    static function check(string $token = null) : bool {
         $response = ApiHelper::request($token)->get(Self::BASE_URL.'/logged-user');
 
         if ($response->status() !== Response::HTTP_OK) {
