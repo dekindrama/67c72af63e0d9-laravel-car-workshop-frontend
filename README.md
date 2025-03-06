@@ -5,13 +5,13 @@
 clone the repository
 
 ```
-
+git clone https://github.com/dekindrama/67c72af63e0d9-laravel-car-workshop-frontend.git
 ```
 
 switch to the folder project
 
 ```
-cd 67c72af63e0d9-laravel-car-workshop-api
+cd 67c72af63e0d9-laravel-car-workshop-frontend.git
 ```
 
 install all the dependencies
